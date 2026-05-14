@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>SnapSphere - Explore</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <h2>📸 SnapSphere</h2>
+
+  <input type="text" id="search" placeholder="Search photos..." onkeyup="searchPhotos()">
+
+  <div id="navLinks"></div>
+</nav>
+
+<!-- TITLE -->
+<h2 class="title">Explore Photos</h2>
+
+<!-- FILTER BUTTONS -->
+<div class="filters">
+  <button onclick="filterPhotos('All')">All</button>
+  <button onclick="filterPhotos('Portrait')">Portrait</button>
+  <button onclick="filterPhotos('Landscape')">Landscape</button>
+  <button onclick="filterPhotos('Street')">Street</button>
+  <button onclick="filterPhotos('Fashion')">Fashion</button>
+
+  <!-- ✅ FIXED (removed extra space) -->
+  <button onclick="filterPhotos('Wildlife')">Wildlife</button>
+
+  <button onclick="filterPhotos('Wedding')">Wedding</button>
+  <button onclick="filterPhotos('Product')">Product</button>
+  <button onclick="filterPhotos('Sports')">Sports</button>
+  <button onclick="filterPhotos('Travel')">Travel</button>
+
+  <!-- ✅ MATCHED EXACTLY WITH JS -->
+  <button onclick="filterPhotos('RealEstate')">Real Estate</button>
+
+  <button onclick="filterPhotos('Advertising')">Advertising</button>
+  <button onclick="filterPhotos('Food')">Food</button>
+  <button onclick="filterPhotos('FineArt')">Fine Art</button>
+  <button onclick="filterPhotos('Photojournalism')">Photojournalism</button>
+</div>
+
+<!-- GALLERY -->
+<div id="gallery" class="gallery-grid"></div>
+
+<!-- LOAD GALLERY JS -->
+<script src="js/gallery.js"></script>
+
+
+<script>
+
+// ✅ STEP 1: ADD HERE
+const role = localStorage.getItem("role");
+
+//if (role !== "customer") {
+  //  alert("Access only for customers");
+    //window.location.href = "index.html";
+//}
+
+// EXISTING CODE
+function loadNavbar() {
+    const nav = document.getElementById("navLinks");
+    const user = localStorage.getItem("user");
+    const userRole = localStorage.getItem("role");
+
+    // Not logged in
+    if (!user || !userRole) {
+        nav.innerHTML = `
+            <a href="index.html">Home</a>
+            <a href="explore.html">Explore</a>
+        `;
+    }
+
+    // Customer
+   else if (userRole === "customer") {
+    nav.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="buy.html">Buy</a>
+        <a href="photographers.html">Hire</a>
+        <a href="orders.html">My Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    `;
+}
+    // Photographer
+   else if (userRole === "photographer") {
+    nav.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="#" onclick="logout()">Logout</a>
+    `;
+}
+}
+function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
+loadNavbar();
+
+</script>
+
+</body></html>
